@@ -3,6 +3,7 @@ import { respostaPadraoMsg } from "@/types/respostaPadraoMsg";
 import { CadastroRequisicao } from "@/types/cadastroRequisicao";
 import { conetarBD } from "@/middleware/conetarBD";
 import { UserModel } from "@/models/UserModel";
+import md5 from "md5";
 
 const endpointCadastro = 
  async(req: NextApiRequest, res: NextApiResponse<respostaPadraoMsg>) => {
@@ -21,9 +22,18 @@ const endpointCadastro =
             return res.status(400).json({erro: "senha inválido"})
         }
 
+        const existedUser = await UserModel.find({email: user.email})
+        if(existedUser && existedUser.length > 0){
+        return res.status(400).json({erro: "Usuário já existente"})
+        }
 
+        const usuarioSave = {
+            name : user.name,
+            email : user.email,
+            password : md5(user.password)
+        }
 
-        await UserModel.create(user)
+        await UserModel.create(usuarioSave)
         return res.status(200).json({ msg: "Usuário criado com sucesso" });
         
 
