@@ -16,7 +16,10 @@ export const conetarBD = (handler : NextApiHandler) =>
 
         mongoose.connection.on('connected', () => console.log("Banco de dados conectado"));
         mongoose.connection.on('error', error => console.log(`ocorreu um erro ao conectar ao banco de dados: ${error}`));
-        await mongoose.connect(DB_CONEXAO_STRING);
+
+        await mongoose.connect(DB_CONEXAO_STRING, {
+            dbName: 'DbUsers' 
+        });
 
 
         return handler(req, res)
