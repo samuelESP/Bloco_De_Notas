@@ -11,12 +11,12 @@ import moment from "moment";
 let data = moment();
 let dataFormatada = data.format('DD/MM/YYYY, HH:mm');
 
-const endpointNote =  async (req:any, res:NextApiResponse<respostaPadraoMsg>) =>{
+const endpointPublicar =  async (req:any, res:NextApiResponse<respostaPadraoMsg>) =>{
 
     if(req.method === "POST"){
 
         const {userId} = req.query;
-
+        
         const usuario = await UserModel.findById(userId);
         
         if(!usuario){
@@ -38,12 +38,15 @@ const endpointNote =  async (req:any, res:NextApiResponse<respostaPadraoMsg>) =>
             nameNote: nameNote,
             anotacao: anotacao
         }
+        await NoteModel.create(nota);
 
-        await NoteModel.create(nota)
+        usuario.notes++;
+        await UserModel.findByIdAndUpdate({_id: usuario._id}, usuario)
+
         return res.status(200).json({msg: "Nota criada com sucesso"})
 
     }
     return res.status(405).json({erro: "Método informado não válido" })
 }
 
-export default validarTokenJWT(conetarBD(endpointNote));
+export default validarTokenJWT(conetarBD(endpointPublicar));
