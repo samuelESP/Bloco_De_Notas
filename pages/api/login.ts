@@ -5,6 +5,7 @@ import md5 from "md5";
 import { UserModel } from "@/models/UserModel";
 import jwt from "jsonwebtoken";
 import { loginResposta } from "@/types/loginResposta";
+import { CORS } from "@/middleware/CORS";
 
 
 
@@ -42,5 +43,5 @@ const endpointLogin = async (req: NextApiRequest, res: NextApiResponse<respostaP
     
 };
 
-export default conetarBD(endpointLogin)
+export default CORS(conetarBD(endpointLogin)) 
  

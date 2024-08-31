@@ -1,4 +1,5 @@
 import { conetarBD } from "@/middleware/conetarBD";
+import { CORS } from "@/middleware/CORS";
 import { validarTokenJWT } from "@/middleware/validarJWT";
 import { NoteModel } from "@/models/NoteModel";
 import { respostaPadraoMsg } from "@/types/respostaPadraoMsg";
@@ -46,4 +47,4 @@ const endpointNotas =
 
     
 
-export default validarTokenJWT(conetarBD(endpointNotas))
+export default CORS(validarTokenJWT(conetarBD(endpointNotas))) 

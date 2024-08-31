@@ -6,6 +6,7 @@ import type { notasRequisicao } from "@/types/notasRequisicao";
 import { NoteModel } from "@/models/NoteModel";
 import { UserModel } from "@/models/UserModel";
 import moment from "moment";
+import { CORS } from "@/middleware/CORS";
 
 
 let data = moment();
@@ -55,4 +56,4 @@ const endpointPublicar =  async (req:any, res:NextApiResponse<respostaPadraoMsg>
     }
 }
 
-export default validarTokenJWT(conetarBD(endpointPublicar));
+export default CORS(validarTokenJWT(conetarBD(endpointPublicar)))

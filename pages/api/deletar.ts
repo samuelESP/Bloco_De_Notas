@@ -4,6 +4,7 @@ import { conetarBD } from "@/middleware/conetarBD";
 import { validarTokenJWT } from "@/middleware/validarJWT";
 import { UserModel } from "@/models/UserModel";
 import { NoteModel } from "@/models/NoteModel";
+import { CORS } from "@/middleware/CORS";
 
 const endpointDelete = async (req: NextApiRequest, res: NextApiResponse<respostaPadraoMsg>) => {
 
@@ -36,4 +37,4 @@ const endpointDelete = async (req: NextApiRequest, res: NextApiResponse<resposta
     }
 }
 
-export default validarTokenJWT(conetarBD(endpointDelete))
+export default CORS(validarTokenJWT(conetarBD(endpointDelete))) 

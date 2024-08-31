@@ -14,6 +14,7 @@
     "moment": "^2.30.1",
     "mongoose": "^8.5.4",
     "next": "14.2.5",
+    "nextjs-cors": "^2.2.0",
     "react": "^18",
     "react-dom": "^18"
   },

@@ -4,6 +4,7 @@ import { CadastroRequisicao } from "@/types/cadastroRequisicao";
 import { conetarBD } from "@/middleware/conetarBD";
 import { UserModel } from "@/models/UserModel";
 import md5 from "md5";
+import { CORS } from "@/middleware/CORS";
 
 const endpointCadastro = 
  async(req: NextApiRequest, res: NextApiResponse<respostaPadraoMsg>) => {
@@ -45,4 +46,4 @@ const endpointCadastro =
     }
 }
 
-export default conetarBD(endpointCadastro)
+export default CORS(conetarBD(endpointCadastro)) 

@@ -4,6 +4,7 @@ import { validarTokenJWT } from "@/middleware/validarJWT";
 import { respostaPadraoMsg } from "@/types/respostaPadraoMsg";
 import { NoteModel } from "@/models/NoteModel";
 import moment from "moment";
+import { CORS } from "@/middleware/CORS";
 
 
 let data = moment();
@@ -47,4 +48,4 @@ const atualizar = async (req: NextApiRequest, res: NextApiResponse<respostaPadra
 
 }
 
-export default validarTokenJWT(conetarBD(atualizar))
+export default CORS(validarTokenJWT(conetarBD(atualizar))) ;
